@@ -1,3 +1,3 @@
 # Questionnaires
 
-Julia package to analyse questionnaire data 
+Julia package to handle questionnaire data

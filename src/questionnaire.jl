@@ -1,4 +1,4 @@
-"""functions handling questionnaire data
+"""functions to handle questionnaire data
 """
 
 struct Questionnaire
