@@ -10,13 +10,15 @@ end
 
 function Questionnaire(
     items::Union{Vector{String}, Vector{Symbol}},
-	scale::LikertScale;
+	scale::Union{LikertScale, Vector};
 	inverted::Union{Nothing, Vector{String}, Vector{Symbol}} = nothing,
 	ignore::Union{Nothing, Vector{String}, Vector{Symbol}} = nothing,
 )
 	inverted = isnothing(inverted) ? String[] : String.(inverted)
 	ignore = isnothing(ignore) ? String[] : String.(ignore)
-
+	if scale isa Vector
+		scale = LikertScale(scale)
+	end
 	Questionnaire(String.(items), scale, inverted, ignore)
 end
 
