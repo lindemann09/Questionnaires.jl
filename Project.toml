@@ -1,7 +1,7 @@
 name = "Questionnaires"
 uuid = "7db06a69-78a5-4293-9298-ce800fde7b46"
 authors = ["Oliver Lindemann"]
-version = "0.1.3"
+version = "0.1.4-DEV"
 
 [deps]
 CategoricalArrays = "324d7699-5711-5eae-9e2f-1d82baa6b597"
