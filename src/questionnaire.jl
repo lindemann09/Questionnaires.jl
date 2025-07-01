@@ -76,10 +76,38 @@ end
 
 
 """calculate scores"""
-function calc_scores(scale::Questionnaire, quest_data::DataFrame)
+function calc_scores(scale::Questionnaire, quest_data::DataFrame;
+		average::Bool=false,
+		skip_missing::Bool=false)
 	it = items(scale, quest_data;
 		recode = true, invert = true, add_columns = nothing)
-	sum(eachcol(it))
+	n_answers = length(scale.items) .- count_missing(it)
+
+	if skip_missing
+		sum_scores = Union{Missing, Int64}[]
+		for (n, r) in zip(n_answers, eachrow(it))
+			if n == 0
+				push!(sum_scores, missing) # no valid response
+			else
+				push!(sum_scores, sum(skipmissing(r))) # error is skipmissing(r) is empty
+			end
+		end
+	else
+		sum_scores = sum(eachcol(it))
+	end
+
+	if average
+		return sum_scores ./ n_answers
+	else
+		return sum_scores
+	end
 end
 
+function count_missing(scale::Questionnaire, quest_data::DataFrame)
+    it = items(scale, quest_data;
+		recode = true, invert = true, add_columns = nothing)
+    return count_missing(it)
+end
+
+count_missing(df::DataFrame) = [count(ismissing, row) for row in eachrow(df)];
 

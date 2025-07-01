@@ -8,6 +8,7 @@ export Questionnaire,
         LikertScale,
         items,
         calc_scores,
+        count_missing,
         read_qualtrics_xlsx
 
 
