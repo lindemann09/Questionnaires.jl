@@ -1,7 +1,7 @@
 name = "Questionnaires"
 uuid = "7db06a69-78a5-4293-9298-ce800fde7b46"
 authors = ["Oliver Lindemann"]
-version = "0.1.1-DEV"
+version = "0.1.2"
 
 [deps]
 CategoricalArrays = "324d7699-5711-5eae-9e2f-1d82baa6b597"
@@ -12,7 +12,7 @@ XLSX = "fdbf4ff8-1666-58a4-91e7-1b58723a45e0"
 CategoricalArrays = "0.10.8"
 DataFrames = "1.7.0"
 XLSX = "0.10.4"
-julia = "1.6.7"
+julia = "1.8"
 
 [extras]
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

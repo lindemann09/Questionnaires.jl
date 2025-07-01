@@ -1,6 +1,8 @@
+TScalePairs = Vector{Pair{Union{Missing, AbstractString}, Int64}}
+
 struct LikertScale
-	pairs::Vector{Pair{Any, Int}}
-	function LikertScale(vop::Vector{Pair{Any, Int}})
+	pairs::TScalePairs
+	function LikertScale(vop::TScalePairs)
 		new(sort(vop, by = x -> x.second))
 	end
 end
@@ -20,9 +22,9 @@ function LikertScale(levels::Vector; values::Union{Nothing, Vector{Int64}} = not
 		values = 1:length(levels) # set values
 	end
 
-	rtn = Pair{Any, Int64}[]
+	rtn = TScalePairs()
 	for (lvl, val) in zip(levels, values)
-		push!(rtn, lvl => Int64(val))
+		push!(rtn, string(lvl) => Int64(val))
 	end
 	return LikertScale(rtn)
 end

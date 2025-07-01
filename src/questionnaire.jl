@@ -43,11 +43,15 @@ function items(
 
 	for c in quest.items
 		if (c in quest.ignore) == ignored_only
+			values = quest_data[!, c]
 			# recode
 			if recode
-				values = CategoricalArrays.recode(quest_data[!, c], quest.scale.pairs...)
-			else
-				values = quest_data[!, c]
+				#check if all values are a known factor level
+				for x in Set(skipmissing(values))
+					x ∈ quest.scale.levels ||
+							throw(ArgumentError("'"*string(x)* "' is a unknown level."))
+				end
+				values = CategoricalArrays.recode(values, quest.scale.pairs...)
 			end
 			#invert scale
 			if c in quest.inverted && invert
